@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="US-ASCII">
+<title>Speedometer</title>
+<style type="text/css">
+#meter {
+	 background: url("meter.png") no-repeat;
+	 width: 440px;
+	 height: 440px;
+}
+#dial {
+	width: 100%;
+	height: 100%;
+}
+#dial_img {
+	position: absolute;
+	top: 57px;
+	left: 195px;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	   var minDeg = -120,
+	       maxDeg = 120,
+	       minVal = 0,
+	       maxVal = 180,
+	       red = 'rgba(255, 0, 0, 0.2)',
+	       green = 'rgba(0, 255, 0, 0.2)',
+	       orange = 'rgba(255, 165, 0, 0.2)';
+	   
+	   changeMeterValue = function(){
+		   var bgColor, val = Math.floor(Math.random() * (maxVal - minVal + 1)) - minVal;
+		   var deg = (val/maxVal) * (maxDeg-minDeg) + minDeg;
+		   var dialEle = document.getElementById('dial');
+		   dialEle.style.webkitTransform = 'rotate(' + deg + 'deg)';
+		   dialEle.style.mozTransform = 'rotate(' + deg + 'deg)';
+		   dialEle.style.ransform = 'rotate(' + deg + 'deg)';
+		   if (val<=60){
+			   bgColor = green;
+		   } else if (val<=120) {
+			   bgColor = orange;
+		   } else if (val<=180) {
+			   bgColor = red;
+		   }
+		   document.getElementById('meter').style.backgroundColor = bgColor;
+	   };
+	   changeMeterValue();
+	   setInterval(changeMeterValue, 4000);
+	   
+	}
+</script>
+</head>
+<body>
+	<div id="meter">
+		<div id="dial"><img id="dial_img" src="dial.png"/></div>
+	</div>
+</body>
+</html>
